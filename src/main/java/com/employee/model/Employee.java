@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,6 +19,7 @@ public class Employee {
 	private String email;
 	private String phone;
 	
+	
 	public Employee() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -30,6 +32,7 @@ public class Employee {
 		this.lastname = lastname;
 		this.email = email;
 		this.phone = phone;
+		
 	}
 
 	public long getId() {
@@ -71,6 +74,7 @@ public class Employee {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 	
 	
 	

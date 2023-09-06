@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -52,16 +51,17 @@ public class ControllerEmployee {
 	}
 
 	@PutMapping("/employees/{id}")
-	public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employee)
+	public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employee1)
 			throws Exception {
-		Employee employee1 = employeeRepo.findById(id)
+		Employee employee = employeeRepo.findById(id)
 				.orElseThrow(() -> new Exception("Employee not exists with this Id :" + id));
-		employee1.setFirstname(employee.getFirstname());
-		employee1.setLastname(employee.getLastname());
-		employee1.setEmail(employee.getEmail());
-		employee1.setPhone(employee.getPhone());
+		employee.setFirstname(employee1.getFirstname());
+		employee.setLastname(employee1.getLastname());
+		employee.setEmail(employee1.getEmail());
+		employee.setPhone(employee1.getPhone());
+		employee.setId(employee1.getId());
 
-		Employee updatedemployee = employeeRepo.save(employee1);
+		Employee updatedemployee = employeeRepo.save(employee);
 		return ResponseEntity.ok(updatedemployee);
 
 	}
@@ -71,11 +71,11 @@ public class ControllerEmployee {
 		Employee employee1 = employeeRepo.findById(id)
 				.orElseThrow(() -> new Exception("Employee not exists with this Id :" + id));
 		employeeRepo.delete(employee1);
-		
+
 		Map<String, Boolean> response = new HashMap<>();
-		response.put("Deleted",Boolean.TRUE);
+		response.put("Deleted", Boolean.TRUE);
 		return ResponseEntity.ok(response);
-		
+
 	}
 
 }
